@@ -29,6 +29,17 @@ describe 'posts' do
       click_on('Create Post')
       expect(current_path).to eq '/posts'
       expect(page).to have_content 'my first post!'
+    end
+
+    it 'should show the username with a new post' do
+      visit '/posts'
+      click_on('New Post')
+
+      expect(current_path).to eq '/posts/new'
+      fill_in 'Caption', with: 'my first post!'
+      click_on('Create Post')
+      expect(current_path).to eq '/posts'
+      expect(page).to have_content 'my first post!'
       expect(page).to have_content 'willhall88'
     end
   end
