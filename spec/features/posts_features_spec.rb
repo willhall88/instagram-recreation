@@ -60,9 +60,10 @@ end
 
 describe 'liking a post' do
   before do
-    user = User.create(username:"willhall88", email:"willhall88@hotmail.com", password:'12345678', password_confirmation:'12345678')
-    login_as user
-    user.posts.create(:caption => "this is a test")
+    user1 = User.create(username:"willhall88", email:"willhall88@hotmail.com", password:'12345678', password_confirmation:'12345678')
+    @user2 = User.create(username:"user2", email:"willhall88@mail.com", password:'12345678', password_confirmation:'12345678')
+    login_as user1
+    user1.posts.create(:caption => "this is a test")
   end
 
   it "add a users like to the post" do
@@ -72,7 +73,17 @@ describe 'liking a post' do
 
     click_on('Like')
     expect(page).to have_content 'Liked by willhall88.'
+  end
 
+  it "add a users like to the post and other users can see the like" do
+    visit '/posts'
+    click_on('Like')
+    logout
+    login_as @user2
+    visit '/posts'
+    expect(page).to have_content 'this is a test'
+    expect(page).to have_content 'willhall88'
+    expect(page).to have_content 'Liked by willhall88.'
   end
 
 end
