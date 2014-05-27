@@ -1,2 +1,11 @@
 
-<p>no current posts yet</p>
+<%= link_to 'New Post', new_post_path%>
+<% if @posts.any? %>
+  <% @posts.each do |post| %>
+    <p><%= post.caption %></p>
+  <% end %>
+
+<% else %>
+
+  <p>no current posts yet</p>
+<% end %>
