@@ -4,7 +4,12 @@
   <% @posts.each do |post| %>
     <p><%= post.caption %><%= post.user.username %></p>
     <%= image_tag post.picture.url(:medium), class:"uploaded-pic" %>
-    <%= link_to 'Like', post_likes_path(post), method: :post %>
+    <p>Liked by 
+    <% post.likes.each do |like| %>
+      <%= like.user.username %>.
+    <% end %></p>
+    <%= link_to 'Like', like_path(post), method: :post %>
+    <%= link_to 'Unlike', unlike_path(post), method: :post %>
   <% end %>
 
 <% else %>

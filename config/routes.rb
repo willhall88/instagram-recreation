@@ -5,9 +5,10 @@ Rails.application.routes.draw do
   
   devise_for :users
 
-  resources :posts do
-    resources :likes
-  end
+  resources :posts
+
+  post 'posts/:post_id/like', to: 'likes#create', as: 'like'
+  post 'posts/:post_id/unlike', to: 'likes#destroy', as: 'unlike'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
