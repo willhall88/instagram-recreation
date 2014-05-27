@@ -10,4 +10,11 @@ class LikesController < ApplicationController
       raise 'hello'
     end
   end
+
+  def destroy
+    @like = Like.where(:post => params[:post_id], :user => current_user).first
+    @like.destroy
+
+    redirect_to '/posts'
+  end
 end
