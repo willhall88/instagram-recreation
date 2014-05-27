@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
 
-  devise_for :users
   get 'posts/index'
   root to: "posts#index"
+  
+  devise_for :users
 
-  resources :posts
+  resources :posts do
+    resources :likes
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

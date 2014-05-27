@@ -57,3 +57,22 @@ describe 'posts' do
     end
   end
 end
+
+describe 'liking a post' do
+  before do
+    user = User.create(username:"willhall88", email:"willhall88@hotmail.com", password:'12345678', password_confirmation:'12345678')
+    login_as user
+    user.posts.create(:caption => "this is a test")
+  end
+
+  it "add a users like to the post" do
+    visit '/posts'
+    expect(page).to have_content 'this is a test'
+    expect(page).to have_content 'willhall88'
+
+    click_on('Like')
+    expect(page).to have_content 'Liked by willhall88.'
+
+  end
+
+end
