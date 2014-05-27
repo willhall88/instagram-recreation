@@ -2,7 +2,7 @@
 <%= link_to 'New Post', new_post_path%>
 <% if @posts.any? %>
   <% @posts.each do |post| %>
-    <p><%= post.caption %></p>
+    <p><%= post.caption %><%= post.user.username %></p>
   <% end %>
 
 <% else %>
