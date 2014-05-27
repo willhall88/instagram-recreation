@@ -3,6 +3,7 @@
 <% if @posts.any? %>
   <% @posts.each do |post| %>
     <p><%= post.caption %><%= post.user.username %></p>
+    <%= image_tag post.picture.url(:medium), class:"uploaded-pic" %>
   <% end %>
 
 <% else %>

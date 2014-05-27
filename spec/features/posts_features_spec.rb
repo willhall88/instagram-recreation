@@ -42,5 +42,18 @@ describe 'posts' do
       expect(page).to have_content 'my first post!'
       expect(page).to have_content 'willhall88'
     end
+
+    context "adding photos to a post" do
+      it 'has a photo with a post' do
+        visit '/posts/new'
+        fill_in 'Caption', with: 'my first post!'
+        attach_file 'Picture', Rails.root.join("./spec/images/mammoth.jpg")
+        click_on('Create Post')
+        expect(current_path).to eq '/posts'
+        expect(page).to have_content 'my first post!'
+        expect(page).to have_content 'willhall88'
+        expect(page).to have_css 'img.uploaded-pic'
+      end
+    end
   end
 end
