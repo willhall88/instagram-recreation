@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Like do
+describe "liking posts" do
   before do
     @user = User.create(username:"willhall88", email:"willhall88@hotmail.com", password:'12345678', password_confirmation:'12345678')
   end
@@ -38,6 +38,25 @@ describe Like do
     like2 = post2.likes.new
     like2.user = @user
     expect(like2.save).to eq false
+  end
+end
+
+describe "unliking posts" do
+  before do
+    @user = User.create(username:"willhall88", email:"willhall88@hotmail.com", password:'12345678', password_confirmation:'12345678')
+  end
+
+  specify 'a user cannot like a post more than once' do
+    post = @user.posts.new(:caption => "a new post")
+    like = post.likes.new
+    like.user = @user
+    expect(like.save).to eq true
+    unlike = Like.where(:post_id => post.id, :user_id => @user.id).first
+    expect(Like.all.count).to eq 1 
+    unlike.destroy
+    expect(Like.all.count).to eq 0 
+    unlike.destroy
+    expect(Like.all.count).to eq 0 
   end
 
 end

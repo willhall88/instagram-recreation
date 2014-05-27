@@ -4,17 +4,13 @@ class LikesController < ApplicationController
     @post = Post.find(params[:post_id])
     like = @post.likes.new
     like.user = current_user
-    if like.save
-      redirect_to '/posts'
-    else
-      raise 'hello'
-    end
+    like.save
+    redirect_to '/posts'
   end
 
   def destroy
-    @like = Like.where(:post => params[:post_id], :user => current_user).first
-    @like.destroy
-
+    @like = Like.where(:post => params[:post_id], :user => current_user)
+    @like.first.destroy if @like.any?
     redirect_to '/posts'
   end
 end
