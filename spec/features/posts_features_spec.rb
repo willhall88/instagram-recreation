@@ -11,7 +11,7 @@ describe 'posts' do
 
   context "when user is logged in " do
     before do
-      user = User.create(email:"willhall88@hotmail.com", password:'12345678', password_confirmation:'12345678')
+      user = User.create(username:"willhall88", email:"willhall88@hotmail.com", password:'12345678', password_confirmation:'12345678')
       login_as user
     end
 
