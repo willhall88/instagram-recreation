@@ -29,6 +29,7 @@ describe 'posts' do
       click_on('Create Post')
       expect(current_path).to eq '/posts'
       expect(page).to have_content 'my first post!'
+      expect(page).to have_content 'willhall88'
     end
   end
 end
