@@ -9,7 +9,8 @@ describe 'a post' do
   it 'should be created with a username' do
     post = Post.new(:caption => "a new post")
     expect(post.save).to eq false
-    post2 = Post.new(:caption => "a new post", :user_id => @user.id)
+    post2 = @user.posts.new(:caption => "a new post")
     expect(post2.save).to eq true
   end
+
 end

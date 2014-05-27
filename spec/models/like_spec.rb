@@ -1,5 +1,43 @@
 require 'spec_helper'
 
-# describe Like do
-#   pending "add some examples to (or delete) #{__FILE__}"
-# end
+describe Like do
+  before do
+    @user = User.create(username:"willhall88", email:"willhall88@hotmail.com", password:'12345678', password_confirmation:'12345678')
+  end
+
+  specify 'a user cannot like a post more than once' do
+    post = @user.posts.new(:caption => "a new post")
+    like = post.likes.new
+    like.user = @user
+    expect(like.save).to eq true
+    like2 = post.likes.new
+    like2.user = @user
+    expect(like2.save).to eq false
+  end
+
+  specify 'a user can like two different posts' do
+    post = @user.posts.new(:caption => "a new post")
+    like = post.likes.new
+    like.user = @user
+    expect(like.save).to eq true
+    post2 = @user.posts.new(:caption => "a second post")
+    like2 = post2.likes.new
+    like2.user = @user
+    expect(like2.save).to eq true
+  end
+
+  specify 'a user can like two different posts, but not the same post twice' do
+    post = @user.posts.new(:caption => "a new post")
+    like = post.likes.new
+    like.user = @user
+    expect(like.save).to eq true
+    post2 = @user.posts.new(:caption => "a second post")
+    like2 = post2.likes.new
+    like2.user = @user
+    expect(like2.save).to eq true
+    like2 = post2.likes.new
+    like2.user = @user
+    expect(like2.save).to eq false
+  end
+
+end

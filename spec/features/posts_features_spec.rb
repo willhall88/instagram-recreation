@@ -85,6 +85,18 @@ describe 'liking a post' do
     expect(page).to have_content 'willhall88'
     expect(page).to have_content 'Liked by willhall88.'
   end
+
+  it "cannot add more than one like from the same user" do
+    visit '/posts'
+    expect(page).to have_content 'this is a test'
+    expect(page).to have_content 'willhall88'
+
+    click_on('Like')
+    expect(page).to have_content 'Liked by willhall88.'
+    click_on('Like')
+    expect(page).to have_content 'Liked by willhall88.'
+    expect(page).not_to have_content 'Liked by willhall88. willhall88.'
+  end
 end
 
 describe 'unliking a post' do
