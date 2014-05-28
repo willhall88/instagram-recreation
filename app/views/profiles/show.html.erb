@@ -1,7 +1,6 @@
-
 <%= link_to 'New Post', new_post_path%>
-<% if @posts.any? %>
-  <% @posts.each do |post| %>
+<% if @user.posts.any? %>
+  <% @user.posts.each do |post| %>
     <p><%= post.caption %><%= post.user.username %></p>
     <%= image_tag post.picture.url(:medium), class:"uploaded-pic" %>
     <p>Liked by 
@@ -10,20 +9,6 @@
     <% end %></p>
     <%= link_to 'Like', like_path(post), method: :post %>
     <%= link_to 'Unlike', unlike_path(post), method: :post %>
-    <ul>
-    <% post.comments.each do |comment| %>
-      <li><%= comment.user.username %>: <%= comment.comment %></li>
-    <% end %>
-    </ul>
-    <%= form_for [post, @comment] do |f| %>
-      <p>
-        <%= f.label :comment %>
-        <%= f.text_area :comment %>
-      </p>
-      <p>
-        <%= f.submit 'Add Comment' %>
-      </p>
-    <% end %>
   <% end %>
 
 <% else %>

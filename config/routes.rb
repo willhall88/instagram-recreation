@@ -5,10 +5,15 @@ Rails.application.routes.draw do
   
   devise_for :users
 
-  resources :posts
+  resources :posts do
+    resources :comments, only:[:create, :destroy]
+  end
+  resources :profiles, only:[:show]
 
   post 'posts/:post_id/like', to: 'likes#create', as: 'like'
   post 'posts/:post_id/unlike', to: 'likes#destroy', as: 'unlike'
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
