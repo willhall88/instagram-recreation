@@ -6,7 +6,7 @@ describe "liking posts" do
   end
 
   specify 'a user cannot like a post more than once' do
-    post = @user.posts.create(:caption => "a new post")
+    post = @user.posts.create()
     like = post.likes.new
     like.user = @user
     expect(like.save).to eq true
@@ -16,22 +16,22 @@ describe "liking posts" do
   end
 
   specify 'a user can like two different posts' do
-    post = @user.posts.create(:caption => "a new post")
+    post = @user.posts.create()
     like = post.likes.new
     like.user = @user
     expect(like.save).to eq true
-    post2 = @user.posts.new(:caption => "a second post")
+    post2 = @user.posts.new()
     like2 = post2.likes.new
     like2.user = @user
     expect(like2.save).to eq true
   end
 
   specify 'a user can like two different posts, but not the same post twice' do
-    post = @user.posts.create(:caption => "a new post")
+    post = @user.posts.create()
     like = post.likes.new
     like.user = @user
     expect(like.save).to eq true
-    post2 = @user.posts.new(:caption => "a second post")
+    post2 = @user.posts.new()
     like2 = post2.likes.new
     like2.user = @user
     expect(like2.save).to eq true
@@ -47,7 +47,7 @@ describe "unliking posts" do
   end
 
   specify 'a user cannot like a post more than once' do
-    post = @user.posts.create(:caption => "a new post")
+    post = @user.posts.create()
     like = post.likes.new
     like.user = @user
     expect(like.save).to eq true
@@ -67,7 +67,7 @@ describe "likes get deleted when a post is deleted" do
   end
 
   specify 'a like is deleted when a post is deleted' do
-    post = @user.posts.create(:caption => "a new post")
+    post = @user.posts.create()
     like = post.likes.new
     like.user = @user
     like.save

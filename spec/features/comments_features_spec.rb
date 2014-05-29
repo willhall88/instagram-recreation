@@ -5,7 +5,8 @@ describe 'commenting on a post' do
     user1 = User.create(username:"willhall88", email:"willhall88@hotmail.com", password:'12345678', password_confirmation:'12345678')
     @user2 = User.create(username:"user2", email:"willhall88@mail.com", password:'12345678', password_confirmation:'12345678')
     login_as user1
-    user1.posts.create(:caption => "this is a test")
+    post = user1.posts.create()
+    post.comments.create(comment: 'this is a test', user: user1)
   end
 
   it "add a users comment to the post" do

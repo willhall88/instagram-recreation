@@ -25,7 +25,7 @@ describe 'posts' do
       click_on('New Post')
 
       expect(current_path).to eq '/posts/new'
-      fill_in 'Caption', with: 'my first post!'
+      fill_in 'Comment', with: 'my first post!'
       click_on('Create Post')
       expect(current_path).to eq '/posts'
       expect(page).to have_content 'my first post!'
@@ -36,7 +36,7 @@ describe 'posts' do
       click_on('New Post')
 
       expect(current_path).to eq '/posts/new'
-      fill_in 'Caption', with: 'my first post!'
+      fill_in 'Comment', with: 'my first post!'
       click_on('Create Post')
       expect(current_path).to eq '/posts'
       expect(page).to have_content 'my first post!'
@@ -46,7 +46,7 @@ describe 'posts' do
     context "adding photos to a post" do
       it 'has a photo with a post' do
         visit '/posts/new'
-        fill_in 'Caption', with: 'my first post!'
+        fill_in 'Comment', with: 'my first post!'
         attach_file 'Picture', Rails.root.join("./spec/images/mammoth.jpg")
         click_on('Create Post')
         expect(current_path).to eq '/posts'
@@ -63,7 +63,8 @@ describe 'liking a post' do
     user1 = User.create(username:"willhall88", email:"willhall88@hotmail.com", password:'12345678', password_confirmation:'12345678')
     @user2 = User.create(username:"user2", email:"willhall88@mail.com", password:'12345678', password_confirmation:'12345678')
     login_as user1
-    user1.posts.create(:caption => "this is a test")
+    post = user1.posts.create()
+    post.comments.create(comment: 'this is a test', user: user1)
   end
 
   it "add a users like to the post" do
@@ -104,7 +105,8 @@ describe 'unliking a post' do
     user1 = User.create(username:"willhall88", email:"willhall88@hotmail.com", password:'12345678', password_confirmation:'12345678')
     @user2 = User.create(username:"user2", email:"willhall88@mail.com", password:'12345678', password_confirmation:'12345678')
     login_as user1
-    user1.posts.create(:caption => "this is a test")
+    post = user1.posts.create()
+    post.comments.create(comment: 'this is a test', user: user1)
   end
 
   it "removes a users like from the post" do

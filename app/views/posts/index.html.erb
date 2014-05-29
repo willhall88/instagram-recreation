@@ -1,46 +1,11 @@
 <h2><%= link_to 'New Post', new_post_path%></h2>
 <div class="main-page-outer row">
   <% if @posts.any? %>
-    <div class="main-page-inner col-md-6 col-md-offset-3">
-        <% @posts.each do |post| %>
-      <div class='row'>
-          <div class="post col-sm-2 col-sm-offset-1">
-            <p><h2><%= post.caption %></h2> <h3>- <%= post.user.username %></h3></p>
-          </div>
-          <div class="post col-sm-6">
-
-                <%= image_tag post.picture.url(:medium), class:"uploaded-pic " %>
-                <p>
-                  <h5>
-                    <%= link_to 'Like', like_path(post), method: :post %>
-                    <%= link_to 'Unlike', unlike_path(post), method: :post %>
-                  </h5>
-                  <h4>
-                    <% post.likes.each do |like| %>
-                      <%= like.user.username %>
-                    <% end %>
-                    likes this
-                  </h4>
-                </p>
-                <ul>
-                  <% post.comments.each do |comment| %>
-                    <li><h4><%= comment.user.username %>:</h4> <%= comment.comment %></li>
-                  <% end %>
-                </ul>
-                <%= form_for [post, @comment] do |f| %>
-                  <p>
-                    <%= f.text_area :comment, autofocus: true, placeholder: "Comments...", class: "comments-box" %>
-                    <%= f.submit "Add Comment", class: "btn btn-primary" %>
-                  </p>
-                <% end %>
-                <hr />
-
-          </div> 
-        <div class="post col-sm-3"></div>
-      </div>
-        <% end %>
-    </div>
+    
+      <%= render @posts %>
+    
   <% else %>
     <p>no current posts yet</p>
   <% end %>
 </div>
+    

@@ -1,17 +1,8 @@
-<%= link_to 'New Post', new_post_path%>
-<% if @user.posts.any? %>
-  <% @user.posts.each do |post| %>
-    <p><%= post.caption %><%= post.user.username %></p>
-    <%= image_tag post.picture.url(:medium), class:"uploaded-pic" %>
-    <p>Liked by 
-    <% post.likes.each do |like| %>
-      <%= like.user.username %>.
-    <% end %></p>
-    <%= link_to 'Like', like_path(post), method: :post %>
-    <%= link_to 'Unlike', unlike_path(post), method: :post %>
+<h2><%= link_to 'New Post', new_post_path%></h2>
+<div class="main-page-outer row">
+  <% if @posts.any? %>
+      <%= render @user.posts %> 
+  <% else %>
+    <p>no current posts yet</p>
   <% end %>
-
-<% else %>
-
-  <p>no current posts yet</p>
-<% end %>
+</div>

@@ -11,7 +11,9 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.create(params[:post].permit(:caption, :picture))
+    @post = current_user.posts.create(params[:post].permit(:picture))
+    @post.comment = params[:post][:comment]
+
     redirect_to "/posts"
   end
 end

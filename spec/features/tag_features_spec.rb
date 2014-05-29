@@ -8,7 +8,7 @@ describe 'adding tags to the posts' do
   end
 
 
-  it 'should show tags in the caption as links' do
+  xit 'should show tags in the caption as links' do
     visit '/posts/new'
     fill_in 'Caption', with: 'my first post! and this is my #hashtag'
     click_on('Create Post')
