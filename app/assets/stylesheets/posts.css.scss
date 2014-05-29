@@ -2,8 +2,21 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .main-page-outer {
-  background-color: rgb(0, 0, 0);
+  background-image: image-url('posts-background.jpg');
+  background-size: cover;
   .main-page-inner {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.7);
   }
+}
+
+h2, h3, h4, h5{
+  display: inline;
+}
+
+.comments-box {
+  width: 100%;
+}
+
+ul {
+ list-style-type: none;
 }
