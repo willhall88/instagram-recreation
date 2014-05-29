@@ -5,7 +5,7 @@ class Post < ActiveRecord::Base
 
   validates :user_id, presence: true
 
-  has_attached_file :picture, :styles => { :medium => "300x300>", :thumb => "100x100>" },
+  has_attached_file :picture, :styles => { :medium => "600x600>", :thumb => "100x100>" },
   storage: :s3,
   s3_credentials: {
     bucket: 'Willstagram',
