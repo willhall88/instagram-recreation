@@ -13,4 +13,11 @@ class Post < ActiveRecord::Base
     secret_access_key: Rails.application.secrets.s3_secret_key
   }
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
+
+  def comment
+  end
+
+  def comment=(comment_text)
+    self.comments.create(comment: comment_text, user: self.user)
+  end
 end

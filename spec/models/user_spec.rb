@@ -6,7 +6,7 @@ describe "posts and likes get deleted when a user is deleted" do
   end
 
   specify 'a post and like is deleted when a user is deleted' do
-    post = @user.posts.create(:caption => "a new post")
+    post = @user.posts.create()
     like = post.likes.new
     like.user = @user
     like.save
@@ -21,7 +21,7 @@ describe "posts and likes get deleted when a user is deleted" do
 
   specify ' a like is deleted from a post owned by a different user, when the first user is deleted' do
     user2 = User.create(username:"willhall", email:"willhall@hotmail.com", password:'12345678', password_confirmation:'12345678')
-    post = user2.posts.create(:caption => "a new post")
+    post = user2.posts.create()
     like = post.likes.new
     like.user = @user
     like.save
