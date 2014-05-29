@@ -12,7 +12,7 @@ describe 'commenting on a post' do
     visit '/posts'
     expect(page).to have_content 'this is a test'
     expect(page).to have_content 'willhall88'
-    fill_in 'Comment', with: 'this is a comment!'
+    fill_in 'Comments...', with: 'this is a comment!'
     click_on('Add Comment')
     expect(current_path).to eq '/posts'
     expect(page).to have_content 'willhall88: this is a comment!'
