@@ -72,7 +72,7 @@ describe 'liking a post' do
     expect(page).to have_content 'willhall88'
 
     click_on('Like')
-    expect(page).to have_content 'Liked by willhall88.'
+    expect(page).to have_content 'willhall88 likes this'
   end
 
   it "add a users like to the post and other users can see the like" do
@@ -83,7 +83,7 @@ describe 'liking a post' do
     visit '/posts'
     expect(page).to have_content 'this is a test'
     expect(page).to have_content 'willhall88'
-    expect(page).to have_content 'Liked by willhall88.'
+    expect(page).to have_content 'willhall88 likes this'
   end
 
   it "cannot add more than one like from the same user" do
@@ -92,10 +92,10 @@ describe 'liking a post' do
     expect(page).to have_content 'willhall88'
 
     click_on('Like')
-    expect(page).to have_content 'Liked by willhall88.'
+    expect(page).to have_content 'willhall88 likes this'
     click_on('Like')
-    expect(page).to have_content 'Liked by willhall88.'
-    expect(page).not_to have_content 'Liked by willhall88. willhall88.'
+    expect(page).to have_content 'willhall88 likes this'
+    expect(page).not_to have_content 'willhall88, willhall88 likes this'
   end
 end
 
@@ -112,9 +112,9 @@ describe 'unliking a post' do
     expect(page).to have_content 'this is a test'
     expect(page).to have_content 'willhall88'
     click_on('Like')
-    expect(page).to have_content 'Liked by willhall88.'
+    expect(page).to have_content 'willhall88 likes this'
     click_on('Unlike')
-    expect(page).not_to have_content 'Liked by willhall88.'
+    expect(page).not_to have_content 'willhall88 likes this'
   end
 
   it "removes the users like from the post and other users can no longer see the like" do
@@ -126,6 +126,6 @@ describe 'unliking a post' do
     visit '/posts'
     expect(page).to have_content 'this is a test'
     expect(page).to have_content 'willhall88'
-    expect(page).not_to have_content 'Liked by willhall88.'
+    expect(page).not_to have_content 'willhall88 likes this'
   end
 end

@@ -30,9 +30,7 @@
                 <%= form_for [post, @comment] do |f| %>
                   <p>
                     <%= f.text_area :comment, autofocus: true, placeholder: "Comments...", class: "comments-box" %>
-                    <%= f.button do %>
-                      <span class="glyphicon glyphicon-comment"></span>
-                    <% end %>
+                    <%= f.submit "Add Comment", class: "btn btn-primary" %>
                   </p>
                 <% end %>
                 <hr />
