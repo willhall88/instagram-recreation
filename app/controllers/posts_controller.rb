@@ -12,8 +12,11 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.create(params[:post].permit(:picture))
-    @post.comment = params[:post][:comment]
-
+    
+    unless params[:post][:comment].blank?
+      @post.create_comment(params[:post][:comment])
+    end
+    
     redirect_to "/posts"
   end
 end

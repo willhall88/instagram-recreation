@@ -19,7 +19,7 @@
         </p>
         <ul>
           <% post.comments.each do |comment| %>
-            <li><h4><%= comment.user.username %>:</h4> <%= comment.comment %></li>
+            <li><h4><%= comment.user.username %>:</h4> <%= linkify_tags(comment.comment) %></li>
           <% end %>
         </ul>
         <%= form_for [post, @comment] do |f| %>

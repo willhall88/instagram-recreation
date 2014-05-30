@@ -19,17 +19,17 @@ describe 'commenting on a post' do
     expect(page).to have_content 'willhall88: this is a comment!'
   end
 
-#   it "add a users comment to the post and other users can see the comment" do
-#     visit '/posts'
-#     fill_in 'Comment', with: 'this is a comment!'
-#     click_on('Add Comment')
-#     logout
-#     login_as @user2
-#     visit '/posts'
-#     expect(page).to have_content 'this is a test'
-#     expect(page).to have_content 'willhall88'
-#     expect(page).to have_content 'willhall88: this is a comment!'
-#   end
+  it "cannot be created as an empty comment" do
+    logout
+    login_as @user2
+    visit '/posts'
+    fill_in 'Comments...', with: ''
+    click_on('Add Comment')
+    visit '/posts'
+    expect(page).to have_content 'this is a test'
+    expect(page).to have_content 'willhall88'
+    expect(page).not_to have_content 'user2:'
+  end
 
 #   it "can add more than one comment from the same user" do
 #     visit '/posts'
