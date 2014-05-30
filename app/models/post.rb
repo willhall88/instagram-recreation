@@ -2,6 +2,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_and_belongs_to_many :tags
 
   validates :user_id, presence: true
 
@@ -17,7 +18,10 @@ class Post < ActiveRecord::Base
   def comment
   end
 
-  def comment=(comment_text)
-    self.comments.create(comment: comment_text, user: self.user)
+  def create_comment(comment_text)
+    new_comment = self.comments.create(comment: comment_text, user: self.user)
+    new_comment.create_hashtags
   end
+
+
 end

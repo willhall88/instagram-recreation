@@ -8,9 +8,9 @@ describe 'adding tags to the posts' do
   end
 
 
-  xit 'should show tags in the caption as links' do
+  it 'should show tags in the caption as links' do
     visit '/posts/new'
-    fill_in 'Caption', with: 'my first post! and this is my #hashtag'
+    fill_in 'Comment', with: 'my first post! and this is my #hashtag'
     click_on('Create Post')
     expect(page).to have_content 'my first post! and this is my #hashtag'
     expect(page).to have_link '#hashtag'
