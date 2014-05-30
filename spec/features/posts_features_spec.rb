@@ -76,6 +76,17 @@ describe 'deleting a post' do
     expect(page).not_to have_content 'willhall88'
   end
 
+  it "cannot be deleted by anybody else" do
+    logout
+    login_as @user2
+    visit '/posts'
+    expect(page).to have_content 'this is a test'
+    expect(page).to have_content 'willhall88'
+    click_on('Delete Post')
+    expect(page).to have_content 'this is a test'
+    expect(page).to have_content 'willhall88'
+  end
+
 end
 
 describe 'liking a post' do
