@@ -19,4 +19,10 @@ class PostsController < ApplicationController
     
     redirect_to "/posts"
   end
+
+  def destroy
+    @post = Post.where(params[:post_id])
+    @post.first.destroy if @post.any?
+    redirect_to '/posts'
+  end
 end

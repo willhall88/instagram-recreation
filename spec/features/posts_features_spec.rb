@@ -58,6 +58,26 @@ describe 'posts' do
   end
 end
 
+describe 'deleting a post' do
+  before do
+    user1 = User.create(username:"willhall88", email:"willhall88@hotmail.com", password:'12345678', password_confirmation:'12345678')
+    @user2 = User.create(username:"user2", email:"willhall88@mail.com", password:'12345678', password_confirmation:'12345678')
+    login_as user1
+    post = user1.posts.create()
+    post.comments.create(comment: 'this is a test', user: user1)
+  end
+
+  it "can be deleted by the creator of the post" do
+    visit '/posts'
+    expect(page).to have_content 'this is a test'
+    expect(page).to have_content 'willhall88'
+    click_on('Delete Post')
+    expect(page).not_to have_content 'this is a test'
+    expect(page).not_to have_content 'willhall88'
+  end
+
+end
+
 describe 'liking a post' do
   before do
     user1 = User.create(username:"willhall88", email:"willhall88@hotmail.com", password:'12345678', password_confirmation:'12345678')
