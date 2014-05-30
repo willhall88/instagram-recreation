@@ -3,10 +3,43 @@
   <div class="container">
     <h1>Hello, everybody</h1>
     <p>you're not welcome here</p>
-    <p><%= link_to "Register", new_registration_path(resource_name), class: "btn btn-primary btn-lg", role: "button" %></p>
+    <p><%= link_to "Register", '#' , class:"btn btn-primary btn-lg", data: {toggle:"modal", target:".sign-up"}%></p>
     
   </div>
 </div>
+
+<% if !user_signed_in? %>
+  <div class="modal fade sign-up">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Register for Willstagram</h4>
+        </div>
+        <div class="modal-body">
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= devise_error_messages! %>
+
+            <div><%= f.label :username %><br />
+              <%= f.text_field :username, autofocus: true , class:"form-control"%></div>
+            <div><%= f.label :email %><br />
+              <%= f.email_field :email, autofocus: true, class:"form-control"%></div>
+            <div><%= f.label :password %><br />
+              <%= f.password_field :password, autocomplete: "off", class:"form-control" %></div>
+            <div><%= f.label :password_confirmation %><br />
+              <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control" %></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%= f.submit "Sign up", class: "btn btn-primary"%>
+          <% end %>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+<% end %>
+
+
 
 <%= render "devise/shared/links" %>
 
