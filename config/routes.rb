@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :comments, only:[:create, :destroy]
   end
   resources :profiles, only:[:show]
+  resources :tags, only:[:show]
 
   post 'posts/:post_id/like', to: 'likes#create', as: 'like'
   post 'posts/:post_id/unlike', to: 'likes#destroy', as: 'unlike'
