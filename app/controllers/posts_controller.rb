@@ -21,8 +21,8 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.where(params[:post_id])
-    @post.first.destroy if @post.any?
+    @post = Post.find(params[:id])
+    @post.destroy if (@post.user == current_user)
     redirect_to '/posts'
   end
 end
