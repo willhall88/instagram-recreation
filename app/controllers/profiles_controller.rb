@@ -3,7 +3,7 @@ class ProfilesController < ApplicationController
 
   def show
     @posts = Post.all
-    @user = current_user
+    @user = User.find_by(username: params[:id])
     @comment = Comment.new
   end
 

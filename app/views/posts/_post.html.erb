@@ -1,6 +1,6 @@
 <div class="main-page-inner col-md-6 col-md-offset-3"><div class='row'>
   <div class="post col-sm-2 col-sm-offset-1">
-    <p><h3>- <%= post.user.username %></h3></p>
+    <p><h3>- <%= linkify_users(post.user.username) %></h3></p>
   </div>
   <div class="post col-sm-6">
         <%= link_to "Delete Post", post_path(post), method: :delete%>
@@ -12,14 +12,14 @@
           </h5>
           <h4>
             <% post.likes.each do |like| %>
-              <%= like.user.username %>
+              <%= linkify_users(like.user.username) %>
             <% end %>
             likes this
           </h4>
         </p>
         <ul>
           <% post.comments.each do |comment| %>
-            <li><h4><%= comment.user.username %>:</h4> <%= linkify_tags(comment.comment) %></li>
+            <li><h4><%= linkify_users(comment.user.username) %>:</h4> <%= linkify_tags(comment.comment) %></li>
           <% end %>
         </ul>
         <%= form_for [post, @comment] do |f| %>
