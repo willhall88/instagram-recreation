@@ -25,3 +25,8 @@
   }
 }
 
+.modal-content {
+  .navbar, .notice, .alert {
+    display: none;
+  }
+}

@@ -21,7 +21,22 @@ describe 'a users page ' do
     expect(page).to have_content "this is 3 test"
     expect(page).to have_content "this is 4 test"
   end
+end
 
 
-  
+describe 'a user should be a link to their page' do
+  before do
+    @user1 = User.create(username:"willhall88", email:"willhall88@hotmail.com", password:'12345678', password_confirmation:'12345678')
+    login_as @user1
+    post1 = @user1.posts.create()
+    post1.comments.create(comment: 'this is 1 test', user: @user1)
+  end
+
+  it 'should show the user as a link' do
+    visit '/posts'
+    expect(page).to have_link('willhall88')
+
+  end
+
+
 end
