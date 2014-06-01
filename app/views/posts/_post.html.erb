@@ -2,7 +2,7 @@
   <div class="post col-sm-2 col-sm-offset-1">
     <p><h3>- <%= linkify_users(post.user.username) %></h3></p>
   </div>
-  <div class="post col-sm-6">
+  <div data-id="<%= post.id %>", class="post col-sm-6">
         <%= link_to "Delete Post", post_path(post), method: :delete%>
         <%= image_tag post.picture.url(:medium), class:"uploaded-pic " %>
         <p>
