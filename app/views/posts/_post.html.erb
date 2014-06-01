@@ -7,8 +7,8 @@
         <%= image_tag post.picture.url(:medium), class:"uploaded-pic " %>
         <p>
           <h5>
-            <%= link_to 'Like', like_path(post), method: :post %>
-            <%= link_to 'Unlike', unlike_path(post), method: :post %>
+            <%= link_to 'Like', like_path(post), method: :post, class:"like" %>
+            <%= link_to 'Unlike', unlike_path(post), method: :post, class:"unlike" %>
           </h5>
           <h4>
             <% post.likes.each do |like| %>

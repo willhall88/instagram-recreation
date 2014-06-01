@@ -17,7 +17,16 @@
 //= require bootstrap
 
 $(document).ready(function() {
-  $('#myModal').modal({
-    remote: true
-  })
+  
+  $('.like').click(function(){
+
+        $.post($(this).attr('href'), $(this).serialize(), function(){
+
+        }, 'json' );
+    return false;
+  });
+
+  // $('#myModal').modal({
+  //   remote: true;
+  // });
 });

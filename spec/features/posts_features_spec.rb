@@ -38,6 +38,7 @@ describe 'posts' do
         fill_in 'Comment', with: 'my first post!'
         click_on('Create Post')
       end
+      save_and_open_page
       expect(page).to have_content 'my first post!'
       expect(page).to have_content 'willhall88'
     end
