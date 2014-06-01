@@ -22,9 +22,11 @@ $(document).ready(function() {
   $('.like').click(function(){
     $.post($(this).attr('href'), $(this).serialize(), function(response){
       console.log(response)
-      var template = $("#likes-template").html();
-      var rendered = Mustache.render(template, response);
-      $('.likes').prepend(response.user);
+
+      var targetId = response.post;
+      var currentPost = $('.post[data-id=' + targetId + ']');
+      
+      currentPost.find('.likes').prepend(response.user + ", ");
     }, 'json' );
     return false;
   });
