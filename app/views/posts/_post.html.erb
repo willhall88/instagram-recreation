@@ -10,7 +10,7 @@
             <%= link_to 'Like', like_path(post), method: :post, class:"like" %>
             <%= link_to 'Unlike', unlike_path(post), method: :post, class:"unlike" %>
           </h5>
-          <h4>
+          <h4 class="likes">
             <% post.likes.each do |like| %>
               <%= linkify_users(like.user.username) %>
             <% end %>
@@ -33,5 +33,9 @@
   </div> 
   <div class="post col-sm-3"></div>
 
-</div>
-    </div>
+</div></div>
+
+<template id="likes">
+  {{username}}
+</template>
+
