@@ -1,12 +1,14 @@
 class LikesController < ApplicationController
 
   def create
-
     @post = Post.find(params[:post_id])
     like = @post.likes.new
     like.user = current_user
-    like.save
-    redirect_to '/posts'
+    if like.save!
+      render 'create', formats: [:json] 
+    else
+      redirect_to '/posts'
+    end
   end
 
   def destroy

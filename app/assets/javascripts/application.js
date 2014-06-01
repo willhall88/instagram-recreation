@@ -15,14 +15,17 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap
+//= require mustache
 
 $(document).ready(function() {
   
   $('.like').click(function(){
-
-        $.post($(this).attr('href'), $(this).serialize(), function(){
-
-        }, 'json' );
+    $.post($(this).attr('href'), $(this).serialize(), function(response){
+      console.log(response)
+      var template = $("#likes-template").html();
+      var rendered = Mustache.render(template, response);
+      $('.likes').prepend(response.user);
+    }, 'json' );
     return false;
   });
 
