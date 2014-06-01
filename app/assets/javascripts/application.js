@@ -21,17 +21,20 @@ $(document).ready(function() {
   
   $('.like').click(function(){
     $.post($(this).attr('href'), $(this).serialize(), function(response){
-      console.log(response)
+      console.log(response.unlike)
 
       var targetId = response.post;
       var currentPost = $('.post[data-id=' + targetId + ']');
       
       currentPost.find('.likes').prepend(response.user + ", ");
+      currentPost.find('.like').replaceWith(response.unlike);
     }, 'json' );
     return false;
   });
 
-  // $('#myModal').modal({
+
+
+  // $('.edit-user').modal({
   //   remote: true;
   // });
 });
