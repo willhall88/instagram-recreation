@@ -20,38 +20,35 @@ describe 'posts' do
       expect(page).to have_content "no current posts yet"
     end
 
-    xit 'should be able to add a new post' do
+    it 'should be able to add a new post', js:true do
       visit '/posts'
       click_on('New Post')
 
-      # expect(current_path).to eq '/posts/new'
       fill_in 'Comment', with: 'my first post!'
       click_on('Create Post')
       expect(current_path).to eq '/posts'
       expect(page).to have_content 'my first post!'
     end
 
-    xit 'should show the username with a new post' do
+    it 'should show the username with a new post', js:true do
       visit '/posts'
         click_on('New Post')
       within(".new-post") do
         fill_in 'Comment', with: 'my first post!'
         click_on('Create Post')
       end
-      save_and_open_page
       expect(page).to have_content 'my first post!'
       expect(page).to have_content 'willhall88'
     end
 
     context "adding photos to a post" do
-      xit 'has a photo with a post' do
+      it 'has a photo with a post', js:true do
         visit '/posts/new'
-        save_and_open_page
-        first(:form, 'new_post') do
+        # first(:form, 'new_post') do
           fill_in 'Comment', with: 'my first post!'
           attach_file 'Picture', Rails.root.join("./spec/images/mammoth.jpg")
           click_on('Create Post')
-        end
+        # end
         expect(current_path).to eq '/posts'
         expect(page).to have_content 'my first post!'
         expect(page).to have_content 'willhall88'
@@ -65,9 +62,9 @@ describe 'deleting a post' do
   before do
     user1 = User.create(username:"willhall88", email:"willhall88@hotmail.com", password:'12345678', password_confirmation:'12345678')
     @user2 = User.create(username:"user2", email:"willhall88@mail.com", password:'12345678', password_confirmation:'12345678')
-    login_as user1
     post = user1.posts.create()
     post.comments.create(comment: 'this is a test', user: user1)
+    login_as user1
   end
 
   it "can be deleted by the creator of the post" do
@@ -92,7 +89,7 @@ describe 'deleting a post' do
 
 end
 
-describe 'liking a post' do
+describe 'liking a post', js:true do
   before do
     user1 = User.create(username:"willhall88", email:"willhall88@hotmail.com", password:'12345678', password_confirmation:'12345678')
     @user2 = User.create(username:"user2", email:"willhall88@mail.com", password:'12345678', password_confirmation:'12345678')
@@ -116,6 +113,7 @@ describe 'liking a post' do
     logout
     login_as @user2
     visit '/posts'
+
     expect(page).to have_content 'this is a test'
     expect(page).to have_content 'willhall88'
     expect(page).to have_content 'willhall88 likes this'
@@ -128,13 +126,11 @@ describe 'liking a post' do
 
     click_on('Like')
     expect(page).to have_content 'willhall88 likes this'
-    click_on('Like')
-    expect(page).to have_content 'willhall88 likes this'
-    expect(page).not_to have_content 'willhall88, willhall88 likes this'
+    expect(page).not_to have_link 'Like'
   end
 end
 
-describe 'unliking a post' do
+describe 'unliking a post', js:true do
   before do
     user1 = User.create(username:"willhall88", email:"willhall88@hotmail.com", password:'12345678', password_confirmation:'12345678')
     @user2 = User.create(username:"user2", email:"willhall88@mail.com", password:'12345678', password_confirmation:'12345678')

@@ -29,11 +29,15 @@ gem 'devise'
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 gem 'aws-sdk'
 gem 'bootstrap-sass'
+gem 'thin'
+gem 'websocket-rails'
 
 group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'launchy'
+  gem 'poltergeist'
+  gem 'database_cleaner'
 end
 
 
