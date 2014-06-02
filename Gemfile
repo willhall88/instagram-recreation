@@ -33,7 +33,8 @@ gem 'thin'
 gem 'websocket-rails'
 
 group :production do
-  # gem 'heroku-secrets', github: 'alexpeattie/heroku_secrets'
+  gem 'heroku_secrets', github: 'alexpeattie/heroku_secrets'
+  gem 'rails_12factor'
 end
 
 group :development, :test do
