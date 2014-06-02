@@ -13,7 +13,12 @@ class LikesController < ApplicationController
 
   def destroy
     @like = Like.where(:post => params[:post_id], :user => current_user)
-    @like.first.destroy if @like.any?
-    redirect_to '/posts'
+    
+    if @like.any?
+      @like.first.destroy
+      render 'destroy', formats: [:json] 
+    else
+      redirect_to '/posts'
+    end
   end
 end

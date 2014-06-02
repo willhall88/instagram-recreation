@@ -13,23 +13,41 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
 //= require bootstrap
 //= require mustache
+//= require_tree .
 
 $(document).ready(function() {
   
-  $('.like').click(function(){
+  $('body').on('click', '.like', function(event){
+    event.preventDefault();
+    event.stopPropagation();
+
     $.post($(this).attr('href'), $(this).serialize(), function(response){
-      console.log(response.unlike)
+ 
+      var targetId = response.post;
+      var currentPost = $('.post[data-id=' + targetId + ']');
+
+      var template = $('#likes-template').html();
+      var output = Mustache.render(template, response)
+
+      currentPost.find('.likes').prepend(output);
+      currentPost.find('.like').replaceWith(response.unlike);
+    }, 'json' );
+  });
+
+  $('body').on('click', '.unlike', function(event){  
+    event.preventDefault();
+    event.stopPropagation();
+    $.post($(this).attr('href'), $(this).serialize(), function(response){
 
       var targetId = response.post;
       var currentPost = $('.post[data-id=' + targetId + ']');
       
-      currentPost.find('.likes').prepend(response.user + ", ");
-      currentPost.find('.like').replaceWith(response.unlike);
+      currentPost.find(".each-likes[data-id='" + response.user + "']").remove();
+      currentPost.find('.unlike').replaceWith(response.like);
     }, 'json' );
-    return false;
+
   });
 
 
