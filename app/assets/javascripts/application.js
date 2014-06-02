@@ -68,5 +68,4 @@ $(document).ready(function() {
   // $('.edit-user').modal({
   //   remote: true;
   // });
-});//= require websocket_rails/main
-
+});
