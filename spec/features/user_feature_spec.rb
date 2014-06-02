@@ -15,7 +15,7 @@ describe 'a users page ' do
   end
 
   it "should show all the posts from one user" do
-    visit profile_path(@user1)
+    visit profile_path(@user1.username)
     expect(page).to have_content "this is 1 test"
     expect(page).to have_content "this is 2 test"
     expect(page).to have_content "this is 3 test"

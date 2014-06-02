@@ -22,6 +22,7 @@
             <% end %>
             likes this
           </h4>
+           <%= link_to "❤ #{post.likes.count}", '#', class: 'btn btn-lg btn-default btn-like' %>
         </p>
         <ul>
           <% post.comments.each do |comment| %>
