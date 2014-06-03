@@ -7,4 +7,4 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Admin.delete_all
-Admin.create(email:'will@a.com', password:'12345678', password_confirmation:'12345678')
+Admin.create(email:'will@hotmail.com', password:'12345678', password_confirmation:'12345678')
