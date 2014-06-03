@@ -19,7 +19,7 @@
       </button>
       <a class="navbar-brand" href="/posts">Willstagram</a>
     </div>
-      <% if !user_signed_in? %>
+      <% if !user_signed_in? && !admin_signed_in?%>
         <div class="navbar-collapse collapse">
           <%= form_for(User.new, as: :user, url: session_path(:user), html: {class: "navbar-form navbar-right", role:"form"})  do |f|%>
             <div class="form-group">
@@ -31,11 +31,18 @@
             <%= f.submit "Sign in", class: "btn btn-success" %> 
           <% end %>
         </div><!--/.navbar-collapse -->
-      <% else %>
+      <% elsif user_signed_in? %>
         <div class="navbar-collapse collapse">
           <div class="navbar-form navbar-right">
             <%= link_to('New Post', '#', class: "btn btn-success", data:{toggle:"modal", target:".new-post"}) %>
             <%= link_to('Edit registration', edit_user_registration_path, class: "btn btn-primary", data:{toggle:"modal", target:".edit-user"}) %>
+            <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: "btn btn-danger") %>
+          </div>
+        </div>
+      <% elsif admin_signed_in? %>
+        <div class="navbar-collapse collapse">
+          <div class="navbar-form navbar-right">
+            <%= link_to('Orders', orders_path, class: "btn btn-primary") %>
             <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: "btn btn-danger") %>
           </div>
         </div>

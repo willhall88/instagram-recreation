@@ -51,7 +51,24 @@ describe 'orders' do
       expect(current_path).to eq (new_post_charge_path(@post))
     end
 
-    
+
   end
 
+  describe 'order emails' do
+    before do
+      clear_emails
+    end
+
+    it 'sends an email with the name of the picture' do
+      @user = User.create(username: 'will', email: 'will@user.com', password: '12345678', password_confirmation: '12345678')
+      @post = @user.posts.create()
+      @comment = @post.comments.create(comment: "San Francisco", user: @user)
+      Order.create(user:@user, post: @post)
+      open_email('will@user.com')
+
+      expect(current_email).to have_content 'Thanks for ordering a print of San Francisco'
+    end
+
+  end
 end
+

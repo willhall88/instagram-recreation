@@ -21,7 +21,8 @@ def create
     :currency    => 'gbp'
   )
 
-  Order.create(user: current_user, post: @post)
+  order = Order.create(user: current_user, post: @post)
+
   flash[:notice] = "Thanks for your order"
   redirect_to ('/posts')
 
