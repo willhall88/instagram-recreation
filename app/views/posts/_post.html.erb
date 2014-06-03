@@ -22,7 +22,8 @@
             <% end %>
             likes this
           </h4>
-           <%= link_to "❤ #{post.likes.count}", '#', class: 'btn btn-lg btn-default btn-like' %>
+           <%= link_to "❤ #{post.likes.count}", '#', class: 'btn btn-sm btn-default btn-like' %>
+           <%= link_to "Buy", new_post_charge_path(post), class: 'btn btn-sm btn-default' %>
         </p>
         <ul>
           <% post.comments.each do |comment| %>
