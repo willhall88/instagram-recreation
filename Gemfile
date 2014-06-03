@@ -31,6 +31,7 @@ gem 'aws-sdk'
 gem 'bootstrap-sass'
 gem 'thin'
 gem 'websocket-rails'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 
 group :production do
   gem 'heroku_secrets', github: 'alexpeattie/heroku_secrets'
