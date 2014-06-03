@@ -1,2 +1,7 @@
-
+<% if @orders.any? %>
+  <% @orders.each do |order| %>
+    <%= order.user.username %> <%= order.post.comments.first.comment %>
+  <% end %>
+<% else %>
   No current orders
+<% end %>
