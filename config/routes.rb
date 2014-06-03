@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :admins
   get 'posts/index'
   root to: "posts#index"
   
@@ -7,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :posts do
     resources :comments, only:[:create, :destroy]
+    resources :charges
   end
   resources :profiles, only:[:show]
   resources :tags, only:[:show]
