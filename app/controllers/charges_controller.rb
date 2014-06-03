@@ -5,6 +5,7 @@ class ChargesController < ApplicationController
   end
 
 def create
+  @post = Post.find(params[:post_id])
   # Amount in pence
   @amount = 2000
 
@@ -20,7 +21,7 @@ def create
     :currency    => 'gbp'
   )
 
-  Order.create(user: current_user, post:@post)
+  Order.create(user: current_user, post: @post)
   flash[:notice] = "Thanks for your order"
   redirect_to ('/posts')
 
