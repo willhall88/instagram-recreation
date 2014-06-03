@@ -33,5 +33,25 @@ describe 'orders' do
 
   end
 
+  context 'when logged in as a user' do
+    before do
+      @user = User.create(username: 'will', email: 'will@user.com', password: '12345678', password_confirmation: '12345678')
+      @post = @user.posts.create()
+      @comment = @post.comments.create(comment: "San Francisco", user: @user)
+      login_as @user
+      visit '/posts'
+    end
+
+    it 'shows a "buy" button with each post' do
+      expect(page).to have_link 'Buy'
+    end
+
+    it 'takes you to the charge page when you click the buy button' do
+      click_link 'Buy'
+      expect(current_path).to eq (new_post_charge_path(@post))
+    end
+
+    
+  end
 
 end
