@@ -65,41 +65,77 @@ $(document).ready(function() {
   });
 
 
-  $('body').on('click', '.post', function(){   
-    
-    GMaps.geolocate({
-      success: function(position) {
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
-        $('.longitude-field').val(longitude);
-        $('.latitude-field').val(latitude);
-        var map = new GMaps({
-          div: '#map',
-          lat: latitude,
-          lng: longitude,
-          click: function(event){
-            map.removeMarkers();
-            map.addMarker({
-              lat: event.latLng.lat(),
-              lng: event.latLng.lng()
-            });
-            $('.longitude-field').val(event.latLng.lng());
-            $('.latitude-field').val(event.latLng.lat());
-          }
-        });   
-      },
-      error: function(error) {
-        alert('Geolocation failed: '+error.message);
-      },
-      not_supported: function() {
-        alert("Your browser does not support geolocation");
-      },
-      always: function() {
+
+  var latitude_data = 0;
+  var longitude_data = 0;
+  var map;
+
+  GMaps.geolocate({
+    success: function(position) {
+      latitude_data = position.coords.latitude;
+      longitude_data = position.coords.longitude;
+      $('.longitude-field').val(position.coords.latitude);
+      $('.latitude-field').val(position.coords.longitude);
+      if(map){
+        map.setCenter(latitude_data,longitude_data);
       }
-    });
+    },
+    error: function(error) {
+      alert('Geolocation failed: '+error.message);
+    },
+    not_supported: function() {
+      alert("Your browser does not support geolocation");
+    },
+    always: function() {
+    }
+  });
+  
+  $("#new-post").on('shown.bs.modal', function() {
+    if(!map){
+      map = new GMaps({
+        div: '#map',
+        lat:latitude_data,
+        lng:longitude_data,
+        click: function(event){
+          map.removeMarkers();
+          map.addMarker({
+            lat: event.latLng.lat(),
+            lng: event.latLng.lng()
+          });
+          $('.longitude-field').val(event.latLng.lng());
+          $('.latitude-field').val(event.latLng.lat());
+        }
+      });
+    }
   });
 
-    
+   $('#submit-location-search').on('click', function(event){  
+      event.preventDefault(); 
+      event.stopPropagation();
+      GMaps.geocode({
+        address: $('#address').val(),
+        callback: function(results, status) {
+          if (status == 'OK') {
+            var latlng = results[0].geometry.location;
+            map.setCenter(latlng.lat(), latlng.lng());
+            map.addMarker({
+              lat: latlng.lat(),
+              lng: latlng.lng()
+            });
+          }
+          $('.longitude-field').val(latlng.lat());
+          $('.latitude-field').val(latlng.lng());
+        }
+      });
+    });
+
+
+  
+
+
+
+
+     
 
 
   // $('.edit-user').modal({
