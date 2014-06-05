@@ -1,6 +1,5 @@
 $(document).ready(function() {
   var postId = $('#map').data('post-id');
-
   if (postId) {
     $.get('/posts/' + postId + '.json', function(post){
       map = new GMaps({
