@@ -16,6 +16,7 @@
 //= require bootstrap
 //= require mustache
 //= require websocket_rails/main
+//= require gmaps
 //= require_tree .
 
 $(document).ready(function() {
@@ -62,6 +63,24 @@ $(document).ready(function() {
       currentPost.find('.unlike').replaceWith(response.like);
     }, 'json' );
   });
+
+    GMaps.geolocate({
+      success: function(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        $('.longitude-field').val(longitude);
+        $('.latitude-field').val(latitude);
+      },
+      error: function(error) {
+        alert('Geolocation failed: '+error.message);
+      },
+      not_supported: function() { 
+        alert("Your browser does not support geolocation");
+      },
+      always: function() {
+        // alert("Done!");
+      }
+    });
 
 
 

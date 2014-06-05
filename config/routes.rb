@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments, only:[:create, :destroy]
     resources :charges
+    resource :map, only:[:show]
   end
   resources :profiles, only:[:show]
   resources :tags, only:[:show]
