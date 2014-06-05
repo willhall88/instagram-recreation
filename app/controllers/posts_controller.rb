@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.create(params[:post].permit(:picture))
+    @post = current_user.posts.create(params[:post].permit(:picture, :latitude, :longitude))
     
     unless params[:post][:comment].blank?
       @post.create_comment(params[:post][:comment])

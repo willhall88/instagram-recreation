@@ -22,8 +22,13 @@
             <% end %>
             likes this
           </h4>
-           <%= link_to "❤ #{post.likes.count}", '#', class: 'btn btn-sm btn-default btn-like' %>
-           <%= link_to "Buy", new_post_charge_path(post), class: 'btn btn-sm btn-default' %>
+            <%= link_to "❤ #{post.likes.count}", '#', class: 'btn btn-sm btn-default btn-like' %>
+            <%= link_to "Buy", new_post_charge_path(post), class: 'btn btn-sm btn-default' %>
+            <% if !post.latitude.nil?%>
+              <%= link_to post_map_path(post), class: "btn btn-default btn-sm" do %>
+                <span class="glyphicon glyphicon-map-marker">Map</span>
+              <% end %>
+            <% end %>
         </p>
         <ul>
           <% post.comments.each do |comment| %>
