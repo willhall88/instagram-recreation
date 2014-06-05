@@ -35,7 +35,7 @@
       <% elsif user_signed_in? %>
         <div class="navbar-collapse collapse">
           <div class="navbar-form navbar-right">
-            <%= link_to('New Post', '#', class: "btn btn-success", data:{toggle:"modal", target:".new-post"}) %>
+            <%= link_to('New Post', '#', class: "post btn btn-success", data:{toggle:"modal", target:".new-post"}) %>
             <%= link_to('Edit registration', edit_user_registration_path, class: "btn btn-primary", data:{toggle:"modal", target:".edit-user"}) %>
             <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: "btn btn-danger") %>
           </div>
@@ -85,6 +85,10 @@
           <p class-"latitude">
             <%= f.hidden_field :latitude, class:'latitude-field' %>
           </p>
+          <div class='container'>
+            <div id='map'></div>  
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
