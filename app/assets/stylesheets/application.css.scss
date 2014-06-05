@@ -26,13 +26,14 @@
 }
 
 .modal-content {
+  width: 700px;
   .navbar, .notice, .alert {
     display: none;
   }
 }
 
 #map {
-  width: 940px;
+  width: 635px;
   height: 500px;
-  background-color: red;
+  background-color: rgb(233, 229, 220);
 }
