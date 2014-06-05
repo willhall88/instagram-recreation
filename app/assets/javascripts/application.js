@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+// require turbolinks
 //= require bootstrap
 //= require mustache
 //= require websocket_rails/main
@@ -64,24 +64,42 @@ $(document).ready(function() {
     }, 'json' );
   });
 
+
+  $('body').on('click', '.post', function(){   
+    
     GMaps.geolocate({
       success: function(position) {
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
         $('.longitude-field').val(longitude);
         $('.latitude-field').val(latitude);
+        var map = new GMaps({
+          div: '#map',
+          lat: latitude,
+          lng: longitude,
+          click: function(event){
+            map.removeMarkers();
+            map.addMarker({
+              lat: event.latLng.lat(),
+              lng: event.latLng.lng()
+            });
+            $('.longitude-field').val(event.latLng.lng());
+            $('.latitude-field').val(event.latLng.lat());
+          }
+        });   
       },
       error: function(error) {
         alert('Geolocation failed: '+error.message);
       },
-      not_supported: function() { 
+      not_supported: function() {
         alert("Your browser does not support geolocation");
       },
       always: function() {
-        // alert("Done!");
       }
     });
+  });
 
+    
 
 
   // $('.edit-user').modal({
