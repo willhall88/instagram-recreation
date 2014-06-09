@@ -1,9 +1,10 @@
 $(document).ready(function() {
-  var postId = $('#map').data('post-id');
+  var postId = $('#show-map').data('post-id');
   if (postId) {
+
     $.get('/posts/' + postId + '.json', function(post){
       map = new GMaps({
-        div: '#map',
+        div: '#show-map',
         lat: post.latitude,
         lng: post.longitude,
       });

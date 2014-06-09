@@ -37,3 +37,9 @@
   height: 500px;
   background-color: rgb(233, 229, 220);
 }
+
+.new_comment{
+  .comments-box{
+    resize: vertical;
+  }
+}

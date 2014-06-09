@@ -33,18 +33,36 @@ $(document).ready(function() {
     postElem.text('❤ ' + post.new_like_count);
   });
 
+  channel3 = connection.subscribe('comments');
+  channel3.bind('new', function(post) {
+    console.log(post.user.username)
+    var postElem = $('.post[data-id=' + post.comment.post_id + '] .comment-list')
+
+    var template = $('#comments-template').html();
+    var output = Mustache.render(template, post);
+
+    postElem.append(output)
+  });
+
+  $('body').on('submit', '.new_comment', function(event){
+    event.preventDefault();
+    event.stopPropagation();
+
+    $.post($(this).attr('action'), $(this).serialize(), function(response){})
+
+  })
 
   $('body').on('click', '.like', function(event){
     event.preventDefault();
     event.stopPropagation();
 
     $.post($(this).attr('href'), $(this).serialize(), function(response){
- 
+
       var targetId = response.post;
       var currentPost = $('.post[data-id=' + targetId + ']');
 
       var template = $('#likes-template').html();
-      var output = Mustache.render(template, response)
+      var output = Mustache.render(template, response);
 
       currentPost.find('.likes').prepend(output);
       currentPost.find('.like').replaceWith(response.unlike);
@@ -123,20 +141,11 @@ $(document).ready(function() {
               lng: latlng.lng()
             });
           }
-          $('.longitude-field').val(latlng.lat());
-          $('.latitude-field').val(latlng.lng());
+          $('.longitude-field').val(latlng.lng());
+          $('.latitude-field').val(latlng.lat());
         }
       });
     });
-
-
-  
-
-
-
-
-     
-
 
   // $('.edit-user').modal({
   //   remote: true;

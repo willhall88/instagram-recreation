@@ -30,7 +30,7 @@
               <% end %>
             <% end %>
         </p>
-        <ul>
+        <ul class="comment-list">
           <% post.comments.each do |comment| %>
             <li><h4><%= linkify_users(comment.user.username) %>:</h4> <%= linkify_tags(comment.comment) %></li>
           <% end %>
@@ -51,4 +51,9 @@
 <template id="likes-template">
   <span class="each-likes" data-id="{{user}}"><a href="/profiles/{{user}}">{{user}}</a></span>
 </template>
+
+<template id="comments-template">
+  <li><h4><a href='/profiles/{{user.username}}'>{{user.username}}</a>:</h4> {{comment.comment}}</li>
+</template>
+
 
