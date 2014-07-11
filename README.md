@@ -1,7 +1,7 @@
 Instagram Clone
 ==================
 This is a recereation of Instagram built on Ruby on Rails in Week 9 at Makers Academy.
-![](./app/asets/images/screenshot.png)
+![](app/assets/images/screenshot.png)
 
 The objectives of the project were to practice setting up a new app in Ruby on Rails including users, admins, a payment system and a mailing system. AJAX, Websockets and use of external API's were also involved. 
 
