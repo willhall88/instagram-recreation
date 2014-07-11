@@ -33,7 +33,7 @@ describe 'posts' do
     it 'should show the username with a new post', js:true do
       visit '/posts'
         click_on('New Post')
-      within(".new-post") do
+      within("#new-post") do
         fill_in 'Comment', with: 'my first post!'
         click_on('Create Post')
       end
